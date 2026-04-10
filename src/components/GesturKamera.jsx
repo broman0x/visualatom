@@ -105,13 +105,19 @@ export default function GesturKamera({ onKibasKiriAtauKanan, onNomorMode, onZoom
       const dx = lms[4].x - lms[8].x;
       const dy = lms[4].y - lms[8].y;
       const jarakPinch = Math.sqrt(dx * dx + dy * dy);
-      if (jarakPinchLalu.current !== null) {
-        const deltaZoom = (jarakPinch - jarakPinchLalu.current) * 40;
-        if (Math.abs(deltaZoom) > 0.1) onZoom?.(deltaZoom);
-      }
-      jarakPinchLalu.current = jarakPinch;
 
       const jumlahJari = hitungJariTegak(lms);
+      const sedangPinch = jumlahJari <= 1;
+      if (sedangPinch) {
+        if (jarakPinchLalu.current !== null) {
+          const deltaZoom = (jarakPinch - jarakPinchLalu.current) * 40;
+          if (Math.abs(deltaZoom) > 0.1) onZoom?.(deltaZoom);
+        }
+        jarakPinchLalu.current = jarakPinch;
+      } else {
+        jarakPinchLalu.current = jarakPinch;
+      }
+
       if (jumlahJari >= 4) {
         if (posisiTanganLalu.current) {
           const deltaX = (pergelangan.x - posisiTanganLalu.current.x) * 50;
@@ -123,7 +129,7 @@ export default function GesturKamera({ onKibasKiriAtauKanan, onNomorMode, onZoom
         posisiTanganLalu.current = null;
       }
 
-      if (statusAman.current) {
+      if (statusAman.current && !sedangPinch && jumlahJari < 4) {
         riwayatJari.current.push(jumlahJari);
         if (riwayatJari.current.length > 10) riwayatJari.current.shift();
         const semuaSama = riwayatJari.current.every(j => j === jumlahJari);
@@ -131,6 +137,8 @@ export default function GesturKamera({ onKibasKiriAtauKanan, onNomorMode, onZoom
           onNomorMode?.(jumlahJari);
           pemicuVisual();
         }
+      } else if (sedangPinch) {
+        riwayatJari.current = [];
       }
 
       const currentX = pergelangan.x;

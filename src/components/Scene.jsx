@@ -100,8 +100,15 @@ function Scene({ namaLayout, padaSaatPilihAtom, dataGestur }) {
 
       // Putar kamera sesuai gerakan tangan
       if (Math.abs(pan.x) > 0.01 || Math.abs(pan.y) > 0.01) {
-        refOrbit.current.rotateLeft(pan.x * 0.05);
-        refOrbit.current.rotateUp(pan.y * 0.05);        
+        refOrbit.current.setAzimuthalAngle(
+          refOrbit.current.getAzimuthalAngle() - pan.x * 0.05
+        );
+        refOrbit.current.setPolarAngle(
+          Math.max(0.1, Math.min(Math.PI - 0.1,
+            refOrbit.current.getPolarAngle() - pan.y * 0.05
+          ))
+        );
+        refOrbit.current.update();
         dataGestur.current.pan.x *= 0.8;
         dataGestur.current.pan.y *= 0.8;
       }
