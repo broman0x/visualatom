@@ -1,0 +1,17 @@
+{
+  "short_name": "VisualAtom",
+  "name": "VisualAtom – 3D Periodic Table",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#0d1117",
+  "background_color": "#0d1117",
+  "description": "Visualisasi tabel periodik interaktif 3D dengan kontrol gestur."
+}

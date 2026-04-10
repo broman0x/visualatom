@@ -1,0 +1,462 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+:root {
+  --b-bg:         #000000;
+  --b-panel:      #0a0a0a;
+  --b-hover:      #121212;
+  --b-border:     rgba(255, 255, 255, 0.08);
+  --b-border-sub: rgba(255, 255, 255, 0.04);
+  
+  --f-text:       #ededed;
+  --f-muted:      #888888;
+  --f-dim:        #555555;
+  
+  --shadow-dock:  0 12px 30px rgba(0,0,0,0.8), 0 0 0 1px var(--b-border);
+  --font-p:       'Inter', sans-serif;
+  --font-h:       'Geist', sans-serif;
+  --font-m:       'Space Mono', monospace;
+  
+  --t-fast:       0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body, #root {
+  width: 100%; height: 100%;
+  overflow: hidden;
+  background: var(--b-bg);
+  color: var(--f-text);
+  font-family: var(--font-p);
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.wadah-utama {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+.logo-brand {
+  position: absolute;
+  top: 24px;
+  left: 28px;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--f-text);
+  pointer-events: none;
+}
+
+.logo-ikon {
+  color: var(--f-text);
+  opacity: 0.9;
+}
+
+.logo-teks {
+  font-family: var(--font-h);
+  font-weight: 600;
+  font-size: 1.05rem;
+  letter-spacing: -0.02em;
+}
+
+.dock-navigasi {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+}
+
+.dock-container {
+  display: flex;
+  align-items: center;
+  padding: 6px;
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 20px;
+  box-shadow: var(--shadow-dock);
+}
+
+.dock-divider {
+  width: 1px;
+  height: 18px;
+  background: var(--b-border);
+  margin: 0 8px;
+}
+
+.dock-tombol {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 34px;
+  padding: 0 14px 0 12px;
+  background: transparent;
+  color: var(--f-muted);
+  border: none;
+  border-radius: 14px;
+  font-family: var(--font-p);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--t-fast);
+}
+
+.dock-tombol.ikon-saja {
+  padding: 0 10px;
+}
+
+.dock-tombol:hover {
+  color: var(--f-text);
+  background: var(--b-hover);
+}
+
+.dock-tombol.aktif {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+.panel-kanan {
+  position: absolute;
+  top: 24px;
+  right: 28px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 260px;
+  pointer-events: none; 
+}
+
+.panel-kanan > * {
+  pointer-events: auto; 
+}
+
+.kartu-petunjuk,
+.kartu-inspektor,
+.kartu-legenda {
+  background: var(--b-panel);
+  border: 1px solid var(--b-border);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+  animation: slide-in-right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.kartu-petunjuk {
+  padding: 16px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  color: var(--f-muted);
+  font-size: 0.78rem;
+  line-height: 1.4;
+}
+
+.ikon-redup {
+  color: var(--f-dim);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.inspektor-header {
+  display: flex;
+  gap: 14px;
+  padding: 20px 20px 16px;
+  border-bottom: 2px solid transparent; 
+  background: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, transparent 100%);
+}
+
+.inspektor-simbol {
+  font-family: var(--font-h);
+  font-size: 2.2rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.inspektor-meta {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+}
+
+.inspektor-nomor {
+  font-family: var(--font-m);
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  color: var(--f-muted);
+}
+
+.inspektor-kategori {
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.inspektor-body {
+  padding: 16px 20px;
+}
+
+.inspektor-nama {
+  font-family: var(--font-h);
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--f-text);
+  margin-bottom: 16px;
+  letter-spacing: -0.01em;
+}
+
+.inspektor-baris {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--b-border-sub);
+}
+
+.inspektor-baris:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.label-baris {
+  font-size: 0.74rem;
+  color: var(--f-muted);
+}
+
+.nilai-baris {
+  font-family: var(--font-m);
+  font-size: 0.74rem;
+  color: var(--f-text);
+  text-align: right;
+}
+
+.tombol-tutup-inspektor {
+  width: 100%;
+  padding: 12px;
+  background: transparent;
+  border: none;
+  border-top: 1px solid var(--b-border);
+  color: var(--f-dim);
+  font-family: var(--font-p);
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: color var(--t-fast), background var(--t-fast);
+}
+
+.tombol-tutup-inspektor:hover {
+  color: var(--f-text);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.kartu-legenda {
+  padding: 16px 20px;
+}
+
+.legenda-judul {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-h);
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--f-muted);
+  margin-bottom: 16px;
+}
+
+.legenda-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.legenda-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.titik-warna {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.nama-warna {
+  font-size: 0.74rem;
+  color: var(--f-text);
+}
+
+.kanvas-area {
+  position: absolute;
+  inset: 0;
+  cursor: crosshair;
+}
+.kanvas-area:active { cursor: move; }
+
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(10px) scale(0.98); }
+  to   { opacity: 1; transform: translateX(0) scale(1); }
+}
+
+@keyframes slide-in-left {
+  from { opacity: 0; transform: translateX(-10px) scale(0.98); }
+  to   { opacity: 1; transform: translateX(0) scale(1); }
+}
+
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}
+
+.wadah-kamera {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  z-index: 100;
+  width: 220px;
+  background: var(--b-panel);
+  border: 1px solid var(--b-border);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+  animation: slide-in-left 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.kamera-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid var(--b-border-sub);
+}
+
+.kamera-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-h);
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--f-text);
+}
+
+.kamera-tutup {
+  background: transparent;
+  border: none;
+  color: var(--f-muted);
+  cursor: pointer;
+  display: flex;
+  transition: color var(--t-fast);
+}
+
+.kamera-tutup:hover {
+  color: #ff4444;
+}
+
+.kamera-container {
+  position: relative;
+  width: 100%;
+  background: #000;
+}
+
+.kamera-resize-handle {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 16px;
+  height: 16px;
+  background: rgba(255, 255, 255, 0.2);
+  cursor: nwse-resize;
+  border-top-left-radius: 4px;
+  z-index: 10;
+}
+
+.kamera-resize-handle:hover {
+  background: var(--a-glow);
+}
+
+.kamera-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scaleX(-1); 
+}
+
+.kamera-kanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  transform: scaleX(-1); 
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@media (max-width: 768px) {
+  .logo-brand { top: 12px; left: 16px; }
+  .logo-teks { font-size: 0.9rem; }
+  
+  .panel-kanan { 
+    top: 50px; 
+    right: 12px; 
+    left: 12px; 
+    width: auto; 
+    gap: 10px;
+  }
+
+  .kartu-inspektor, .kartu-legenda {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  }
+
+  .inspektor-header { padding: 14px 16px; }
+  .inspektor-simbol { font-size: 1.8rem; }
+  .inspektor-nama { font-size: 0.95rem; margin-bottom: 10px; }
+
+  .wadah-kamera { 
+    bottom: 85px; 
+    left: 12px; 
+    width: 140px; 
+    min-width: 120px;
+  }
+
+  .dock-navigasi { 
+    bottom: 12px; 
+    width: 94%; 
+  }
+  
+  .dock-container { 
+    padding: 4px;
+    gap: 2px;
+    justify-content: space-around;
+  }
+
+  .dock-label { display: none; }
+  .dock-tombol { 
+    padding: 0; 
+    width: 40px; 
+    height: 40px; 
+    justify-content: center;
+    border-radius: 12px;
+  }
+  
+  .dock-divider { margin: 0 4px; }
+}
+
+@media (max-width: 380px) {
+  .inspektor-header { gap: 10px; }
+  .inspektor-simbol { font-size: 1.5rem; }
+  .wadah-kamera { display: none; }
+}
